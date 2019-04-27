@@ -125,8 +125,8 @@ function Vector(x, y){
 
     this.normalize = () => {
         let m = this.magnitude();
-        if(m != 0){
-            this.div(m);
+        if(m !== 0){
+            this.divVal(m);
         }
     }
 
@@ -134,6 +134,10 @@ function Vector(x, y){
     this.magnitudeMultVal = (val) => {
         let n = vNormalize(this);
         this.multVal(n, val);
+    }
+
+    this.copy = () => {
+        return new Vector(this.x, this.y);
     }
 }
 
@@ -239,4 +243,8 @@ function vNormalize(v){
 function vMagnitudeMultVal(v, val){
     let n = vNormalize(v);
     return vMultVal(n, val);
+}
+
+function vCopy(v){
+    return new Vector(v.x, v.y);
 }
