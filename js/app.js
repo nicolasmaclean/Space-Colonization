@@ -12,7 +12,6 @@ function init() {
 
     tree = new Tree(new Vector(canvas.width/2, canvas.height), canvas.width, canvas.height-200);
     tree.draw();
-    tree.update();
 }
 
 function animate() {
@@ -26,4 +25,4 @@ function animate() {
 window.addEventListener('resize', init);
 
 init();
-// animate();
+animate();

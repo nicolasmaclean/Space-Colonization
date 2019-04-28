@@ -1,5 +1,5 @@
-const maxDistance = 20;
-const minDistance = 5;
+const maxDistance = 100;
+const minDistance = 3;
 
 function Tree(pos, width, height){
     this.branches = [];
@@ -26,51 +26,93 @@ function Tree(pos, width, height){
 
     //grows the tree
     this.grow = () => {
-        for(let i = 0; i < this.leaves.length; i++){
-            let leaf = this.leaves[i];
-            let closestBranch = null;
-            let record = maxDistance;
-            for(let j = 0; j < this.branches.length; j++){
-                let branch = this.branches[i];
-                let d = vDistance(leaf.pos, branch.pos);
-                if(d < minDistance){
-                    this.reached = true;
-                    closestBranch = null;
-                    break;
-                } else if(d < record){
-                    closestBranch = branch;
-                    record = d;
-                }
-            }
+        // for(let i = 0; i < this.leaves.length; i++){
+            //     let leaf = this.leaves[i];
+            //     var closestBranch = null;
+            //     let record = maxDistance;
+        //     for(let j = 0; j < this.branches.length; j++){
+            //         let branch = this.branches[i];
+        //         let d = vDistance(leaf.pos, branch.pos);
+        //         if(d < minDistance){
+        //             console.log("<md " + d);
+        //             leaf.reached = true;
+        //             closestBranch = null;
+        //             break;
+        //         } else if(d < record){
+            //             console.log("<r " + d);
+        //             closestBranch = branch;
+        //             record = d;
+        //         }
+        //     }
             
-            if(closestBranch !== null){
-                var nDir = vSubtract(closestBranch.pos, leaf.pos);
-                nDir.normalize();
-                closestBranch.dir.add(nDir);
+        //     if(closestBranch !== null){
+        //         var nDir = vSubtract(closestBranch.pos, leaf.pos);
+        //         nDir.normalize();
+        //         closestBranch.dir.add(nDir);
+        //         closestBranch.count++;
+        //         console.log(closestBranch.count);
+        //     }
+        // }
+        
+        // //deletes leaves too close to a branch
+        // for(let i = this.leaves.length-1; i >= 0; i--){
+            //     if(this.leaves[i].reached){
+                //         this.leaves.splice(i, 1);
+                //     }
+                // }
+                
+                // for(let i = this.branches.length-1; i >= 0; i--){
+        //     let branch = this.branches[i];
+        //     if(branch.count > 0){
+            //         branch.dir.divVal(branch.count+1);
+            //         this.branches.push(branch.next());
+            //         branch.reset();
+            //     }
+            // }
+            for (var i = 0; i < this.leaves.length; i++) {
+                var leaf = this.leaves[i];
+                var closestBranch = null;
+                var record = maxDistance;
+                for (var j = 0; j < this.branches.length; j++) {
+                    var branch = this.branches[j];
+                    var d = vDistance(leaf.pos, branch.pos);
+                    if (d < minDistance) {
+                        leaf.reached = true;
+                        closestBranch = null;
+                        break;
+                    } else if (d < record) {
+                        closestBranch = branch;
+                        record = d;
+                    }
+                }
+            
+            if (closestBranch != null) {
+                var newDir = vSubtract(leaf.pos, closestBranch.pos);
+                newDir.normalize();
+                closestBranch.dir.add(newDir);
                 closestBranch.count++;
             }
-        }
-        
-        //deletes leaves too close to a branch
-        for(let i = this.leaves.length-1; i >= 0; i--){
-            if(this.leaves[i].reached){
+          }
+          
+          for (var i = this.leaves.length - 1; i >= 0; i--) {
+            if (this.leaves[i].reached) {
                 this.leaves.splice(i, 1);
             }
-        }
-        
-        for(let i = this.branches.length-1; i >= 0; i--){
-            let branch = this.branches[i];
-            if(branch.count > 0){
-                branch.dir.divVal(branch.count+1);
+          }
+          
+          for (var i = this.branches.length - 1; i >= 0; i--) {
+            var branch = this.branches[i];
+            if (branch.count > 0) {
+                branch.dir.divVal(branch.count + 1);
                 this.branches.push(branch.next());
                 branch.reset();
             }
         }
-    }
+        }
     
-    //makes leaves
-    this.makeLeaves = () => {
-        for(let i = 0; i < 100; i++){
+        //makes leaves
+        this.makeLeaves = () => {
+        for(let i = 0; i < 400; i++){
             let leaf = new Leaf(this.width, this.height);
             this.leaves.push(leaf);
         }
@@ -95,34 +137,60 @@ function Tree(pos, width, height){
 
     //makes the tree
     this.initializeTree = () => {
-        //makes leaves
-        this.makeLeaves();
+        // //makes leaves
+        // this.makeLeaves();
         
-        //makes root at pos and directs to center of mass
-        let pos = new Vector(this.pos.x, this.pos.y);
-        let centerMass = this.leafMassCenter();
-        let dir = new Vector(0, -1);//vSubtract(centerMass, pos);
-        dir.normalize();
-        let root = new Branch(null, pos, dir);
+        // //makes root at pos and directs to center of mass
+        // let pos = new Vector(this.pos.x, this.pos.y);
+        // // let centerMass = this.leafMassCenter();
+        // let dir = new Vector(0, -1);//vSubtract(centerMass, pos);
+        // dir.normalize();
+        // let root = new Branch(null, pos, dir);
+        // this.branches.push(root);
+
+        // let current = root;
+        // let found = false;
+
+        // while(!found) {
+        //     for(let i = 0; i < this.leaves.length; i++){
+        //         var d = vDistance(current.pos, this.leaves[i].pos);
+        //         if(d < maxDistance){
+        //             found = true;
+        //         }
+        //     }
+            
+        //     if(!found){
+        //         var branch = current.next();
+        //         current = branch;
+        //         this.branches.push(current);
+        //     }
+        // }
+
+        // for (var i = 0; i < 1500; i++) {
+        //     this.leaves.push(new Leaf());
+        // }
+        //coding train's source code
+        this.makeLeaves();
+
+        var pos = new Vector(this.pos.x, this.pos.y);
+        var dir = new Vector(0, -1);
+        var root = new Branch(null, pos, dir);
         this.branches.push(root);
-
-        let current = root;
-        let found = false;
-
-        do {
-            for(let i = 0; i < this.leaves.length; i++){
+        var current = root;
+        var found = false;
+        while (!found) {
+            for (var i = 0; i < this.leaves.length; i++) {
                 var d = vDistance(current.pos, this.leaves[i].pos);
-                if(d < maxDistance){
+                if (d < maxDistance) {
                     found = true;
                 }
             }
-            
-            if(!found){
+            if (!found) {
                 var branch = current.next();
                 current = branch;
                 this.branches.push(current);
             }
-        }while(!found)
+        }
     }
 
     this.initializeTree();
