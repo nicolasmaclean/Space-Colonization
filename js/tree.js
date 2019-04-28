@@ -26,92 +26,50 @@ function Tree(pos, width, height){
 
     //grows the tree
     this.grow = () => {
-        // for(let i = 0; i < this.leaves.length; i++){
-            //     let leaf = this.leaves[i];
-            //     var closestBranch = null;
-            //     let record = maxDistance;
-        //     for(let j = 0; j < this.branches.length; j++){
-            //         let branch = this.branches[i];
-        //         let d = vDistance(leaf.pos, branch.pos);
-        //         if(d < minDistance){
-        //             console.log("<md " + d);
-        //             leaf.reached = true;
-        //             closestBranch = null;
-        //             break;
-        //         } else if(d < record){
-            //             console.log("<r " + d);
-        //             closestBranch = branch;
-        //             record = d;
-        //         }
-        //     }
-            
-        //     if(closestBranch !== null){
-        //         var nDir = vSubtract(closestBranch.pos, leaf.pos);
-        //         nDir.normalize();
-        //         closestBranch.dir.add(nDir);
-        //         closestBranch.count++;
-        //         console.log(closestBranch.count);
-        //     }
-        // }
-        
-        // //deletes leaves too close to a branch
-        // for(let i = this.leaves.length-1; i >= 0; i--){
-            //     if(this.leaves[i].reached){
-                //         this.leaves.splice(i, 1);
-                //     }
-                // }
-                
-                // for(let i = this.branches.length-1; i >= 0; i--){
-        //     let branch = this.branches[i];
-        //     if(branch.count > 0){
-            //         branch.dir.divVal(branch.count+1);
-            //         this.branches.push(branch.next());
-            //         branch.reset();
-            //     }
-            // }
-            for (var i = 0; i < this.leaves.length; i++) {
+        for(let i = 0; i < this.leaves.length; i++){
                 var leaf = this.leaves[i];
                 var closestBranch = null;
                 var record = maxDistance;
-                for (var j = 0; j < this.branches.length; j++) {
-                    var branch = this.branches[j];
-                    var d = vDistance(leaf.pos, branch.pos);
-                    if (d < minDistance) {
-                        leaf.reached = true;
-                        closestBranch = null;
-                        break;
-                    } else if (d < record) {
-                        closestBranch = branch;
-                        record = d;
-                    }
+            for(let j = 0; j < this.branches.length; j++){
+                var branch = this.branches[j];
+                var d = vDistance(leaf.pos, branch.pos);
+                if(d < minDistance){
+                    leaf.reached = true;
+                    closestBranch = null;
+                    break;
+                } else if(d < record){
+                    closestBranch = branch;
+                    record = d;
                 }
+            }
             
-            if (closestBranch != null) {
-                var newDir = vSubtract(leaf.pos, closestBranch.pos);
-                newDir.normalize();
-                closestBranch.dir.add(newDir);
+            if(closestBranch != null){
+                var nDir = vSubtract(leaf.pos, closestBranch.pos);
+                nDir.normalize();
+                closestBranch.dir.add(nDir);
                 closestBranch.count++;
             }
-          }
-          
-          for (var i = this.leaves.length - 1; i >= 0; i--) {
-            if (this.leaves[i].reached) {
+        }
+        
+        //deletes leaves too close to a branch
+        for(let i = this.leaves.length-1; i >= 0; i--){
+            if(this.leaves[i].reached){
                 this.leaves.splice(i, 1);
             }
-          }
-          
-          for (var i = this.branches.length - 1; i >= 0; i--) {
+        }
+                
+        for(let i = this.branches.length-1; i >= 0; i--){
             var branch = this.branches[i];
-            if (branch.count > 0) {
-                branch.dir.divVal(branch.count + 1);
+            if(branch.count > 0){
+                branch.dir.divVal(branch.count+1);
                 this.branches.push(branch.next());
                 branch.reset();
             }
         }
-        }
+    }
     
         //makes leaves
-        this.makeLeaves = () => {
+    this.makeLeaves = () => {
         for(let i = 0; i < 400; i++){
             let leaf = new Leaf(this.width, this.height);
             this.leaves.push(leaf);
