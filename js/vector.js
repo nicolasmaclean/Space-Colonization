@@ -136,8 +136,19 @@ function Vector(x, y){
         this.multVal(n, val);
     }
 
+    //copies this vector and returns it
     this.copy = () => {
         return new Vector(this.x, this.y);
+    }
+
+    //return the distance of two vectors
+    this.distance = (v) => {
+        return Math.sqrt((this.x - v.x)*(this.x - v.x) + (this.y - v.y)*(this.y - v.y));
+    }
+
+    //returns the distance of two vectors squared
+    this.distanceSQ = (v) => {
+        return (this.x - v.x)*(this.x - v.x) + (this.y - v.y)*(this.y - v.y);
     }
 }
 
@@ -247,4 +258,12 @@ function vMagnitudeMultVal(v, val){
 
 function vCopy(v){
     return new Vector(v.x, v.y);
+}
+
+function vDistance(v1, v2){
+    return Math.sqrt((v1.x - v2.x)*(v1.x - v2.x) + (v1.y - v2.y)*(v1.y - v2.y));
+}
+
+function vDistanceSQ(v1, v2){
+    return (v1.x - v2.x)*(v1.x - v2.x) + (v1.y - v2.y)*(v1.y - v2.y);
 }
