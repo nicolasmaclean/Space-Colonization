@@ -18,13 +18,10 @@ function Branch(parent, pos, dir){
     }
 
     this.next = () => {
-        // let nPos = vAdd(this.pos, this.dir);
-        // let nBranch = new Branch(this, nPos, this.dir.copy());
-        // return nBranch;
-        var nextDir = vMultVal(this.dir, length);
-        var nextPos = vAdd(this.pos, nextDir);
-        var nextBranch = new Branch(this, nextPos, this.dir.copy());
-        return nextBranch;
+        let nDir = vMultVal(this.dir, length);
+        let nPos = vAdd(this.pos, nDir);
+        let nBranch = new Branch(this, nPos, this.dir.copy());
+        return nBranch;
     }
 
     this.reset = () => {

@@ -127,70 +127,48 @@ function Tree(pos, width, height){
     this.leafMassCenter = () => {
         let totalMassX = 0;
         let totalMassY = 0;
-        let count = this.leaves.length;
-        for(let i = 0; i < count; i++){
+        let leafAmt = this.leaves.length;
+        for(let i = 0; i < leafAmt; i++){
             totalMassX += this.leaves[i].x;
             totalMassY += this.leaves[i].y;
         }
-        return new Vector(totalMassX/count, totalMassY/count)
+        return new Vector(totalMassX/leafAmt, totalMassY/leafAmt);
     }
 
     //makes the tree
     this.initializeTree = () => {
-        // //makes leaves
-        // this.makeLeaves();
-        
-        // //makes root at pos and directs to center of mass
-        // let pos = new Vector(this.pos.x, this.pos.y);
-        // // let centerMass = this.leafMassCenter();
-        // let dir = new Vector(0, -1);//vSubtract(centerMass, pos);
-        // dir.normalize();
-        // let root = new Branch(null, pos, dir);
-        // this.branches.push(root);
-
-        // let current = root;
-        // let found = false;
-
-        // while(!found) {
-        //     for(let i = 0; i < this.leaves.length; i++){
-        //         var d = vDistance(current.pos, this.leaves[i].pos);
-        //         if(d < maxDistance){
-        //             found = true;
-        //         }
-        //     }
-            
-        //     if(!found){
-        //         var branch = current.next();
-        //         current = branch;
-        //         this.branches.push(current);
-        //     }
-        // }
-
-        // for (var i = 0; i < 1500; i++) {
-        //     this.leaves.push(new Leaf());
-        // }
-        //coding train's source code
+        //makes leaves
         this.makeLeaves();
-
-        var pos = new Vector(this.pos.x, this.pos.y);
-        var dir = new Vector(0, -1);
-        var root = new Branch(null, pos, dir);
+        
+        // makes root
+        let pos = new Vector(this.pos.x, this.pos.y);
+        let dir = new Vector(0, -1);
+        dir.normalize();
+        let root = new Branch(null, pos, dir);
         this.branches.push(root);
-        var current = root;
-        var found = false;
-        while (!found) {
-            for (var i = 0; i < this.leaves.length; i++) {
+
+        //stores the newest branch
+        let current = root;
+        let found = false;
+
+        //grows the trunk as long as it is not near a leaf
+        while(!found) {
+            for(let i = 0; i < this.leaves.length; i++){
                 var d = vDistance(current.pos, this.leaves[i].pos);
-                if (d < maxDistance) {
+                //checks if current branch is close to a leaf
+                if(d < maxDistance){
                     found = true;
                 }
             }
-            if (!found) {
+
+            //makes another branch
+            if(!found){
                 var branch = current.next();
                 current = branch;
                 this.branches.push(current);
             }
         }
+
     }
 
     this.initializeTree();
