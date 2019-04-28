@@ -1,3 +1,4 @@
+//anything over about 5 doesn't really work, but can still look cool
 const length = 5;
 
 function Branch(parent, pos, dir){

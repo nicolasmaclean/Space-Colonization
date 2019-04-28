@@ -1,4 +1,4 @@
-const maxDistance = 100;
+const maxDistance = 80;
 const minDistance = 3;
 
 function Tree(pos, width, height){
@@ -68,9 +68,9 @@ function Tree(pos, width, height){
         }
     }
     
-        //makes leaves
+    //makes leaves
     this.makeLeaves = () => {
-        for(let i = 0; i < 400; i++){
+        for(let i = 0; i < 1000; i++){
             let leaf = new Leaf(this.width, this.height);
             this.leaves.push(leaf);
         }
