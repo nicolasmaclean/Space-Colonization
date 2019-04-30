@@ -126,7 +126,6 @@ function Tree(pos, width, height){
                 this.branches.push(current);
             }
         }
-
     }
 
     this.initializeTree();
