@@ -1,5 +1,5 @@
 //anything over about 5 doesn't really work, but can still look cool
-const length = 5;
+const length = 4;
 
 function Branch(parent, pos, dir){
     this.parent = parent;

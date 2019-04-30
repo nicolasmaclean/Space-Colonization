@@ -1,5 +1,5 @@
 function Leaf(width, height){
-    this.pos = new Vector(4 + Math.random()*(width-8), 4 + Math.random()*height)
+    this.pos = new Vector(4 + Math.random()*(width-8), Math.random()*height)
     this.radius = 8;
     this.reached = false;
 
