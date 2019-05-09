@@ -10,7 +10,7 @@ function init() {
     canvas.height = window.innerHeight;
 
     if(mouse === undefined){
-        mouse = new Vector(canvas.width/2, 0);//canvas.height);
+        mouse = new Vector(canvas.width/2, canvas.height);//canvas.height);
     }
 
     c.fillStyle = "#333";
