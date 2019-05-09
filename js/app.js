@@ -16,7 +16,7 @@ function init() {
     c.fillStyle = "#333";
     c.fillRect(0, 0, canvas.width, canvas.height);
 
-    tree = new Tree(mouse, canvas.width, canvas.height-200);
+    tree = new Tree(mouse, canvas.width, canvas.height-100);
     tree.draw();
 }
 
