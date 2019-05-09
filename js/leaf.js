@@ -4,7 +4,7 @@ function Leaf(width, height){
     this.reached = false;
 
     this.draw = () => {
-        c.strokeStyle = "#333"
+        c.strokeStyle = "#fff"
         c.beginPath();
         c.arc(this.pos.x, this.pos.y, 4, 0, Math.PI*2, false);
         c.stroke();
