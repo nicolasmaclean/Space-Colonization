@@ -13,7 +13,7 @@ function init() {
         mouse = new Vector(canvas.width/2, 0);//canvas.height);
     }
 
-    c.fillStyle = "#fff";
+    c.fillStyle = "#333";
     c.fillRect(0, 0, canvas.width, canvas.height);
 
     tree = new Tree(mouse, canvas.width, canvas.height-200);
