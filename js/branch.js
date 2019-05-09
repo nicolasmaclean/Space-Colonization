@@ -10,7 +10,7 @@ function Branch(parent, pos, dir){
     
     this.draw = () => {
         if(this.parent !== null){
-            c.strokeStyle = "#fff";
+            c.strokeStyle = "#333";
             c.beginPath();
             c.moveTo(this.parent.pos.x, this.parent.pos.y);
             c.lineTo(this.pos.x, this.pos.y);
