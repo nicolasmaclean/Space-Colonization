@@ -23,7 +23,7 @@ function init() {
 function animate() {
     // setTimeout( () => {
         requestAnimationFrame(animate);
-        c.fillStyle = "#fff";
+        c.fillStyle = "#333";
         c.fillRect(0, 0, canvas.width, canvas.height);
 
         tree.update();
